@@ -38,6 +38,7 @@ $PY preview_dashboard.py          # 假后端 + 假数据预览面板（端口 8
 | `bench_fp.py` | 误杀率：正常聊天 / 玩梗 / 学术讨论被误判的比例 |
 | `bench_evasion.py` | 变体召回：插符号 / 同音 / 全拼等绕写的检出率 |
 | `bench_variant.py` | 变体索引的构建耗时与规模 |
+| `bench_runtime.py` | 插件导入耗时 / RSS / 词库首次编译 / 决策 p95 |
 
 ## 发布打包（build_release_zip.py）
 
