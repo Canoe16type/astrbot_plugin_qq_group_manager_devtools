@@ -40,6 +40,14 @@ $PY preview_dashboard.py          # 假后端 + 假数据预览面板（端口 8
 | `bench_variant.py` | 变体索引的构建耗时与规模 |
 | `bench_runtime.py` | 插件导入耗时 / RSS / 词库首次编译 / 决策 p95 |
 
+## 静态体检（ci_static.py）
+
+```bash
+python ci_static.py --plugin ../astrbot_plugin_qq_group_manager
+```
+
+检查：未定义名/redefinition、危险调用（eval/exec/system/pickle/yaml.load）、硬编码密钥，并统计完全静默的 except。
+
 ## 发布打包（build_release_zip.py）
 
 生成给用户安装的 zip，只含运行时文件，**排除 `docs/`（含截图）、`tests/`、`tools/`、`.github/`**：
