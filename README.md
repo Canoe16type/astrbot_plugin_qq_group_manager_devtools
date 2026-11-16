@@ -39,6 +39,17 @@ $PY preview_dashboard.py          # 假后端 + 假数据预览面板（端口 8
 | `bench_evasion.py` | 变体召回：插符号 / 同音 / 全拼等绕写的检出率 |
 | `bench_variant.py` | 变体索引的构建耗时与规模 |
 
+## 发布打包（build_release_zip.py）
+
+生成给用户安装的 zip，只含运行时文件，**排除 `docs/`（含截图）、`tests/`、`tools/`、`.github/`**：
+
+```bash
+python build_release_zip.py --plugin ../astrbot_plugin_qq_group_manager --ref v1.6.0
+# 输出：./astrbot_plugin_qq_group_manager-slim.zip（1.6.0 实测约 567 KB）
+```
+
+体积对比：包含全部文档时 1.48 MB → 精简后 0.55 MB。结构仍为单层目录前缀、无目录条目。
+
 ## 约定
 
 - 插件目录用 `QGM_PLUGIN_DIR` 指定；未指定时会在同级目录找 `*qq_group_manager*`（排除本仓库）。
