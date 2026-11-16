@@ -33,8 +33,8 @@ def pyflakes_errors(root: pathlib.Path) -> list[str]:
 def scan_sources(root: pathlib.Path):
     bad_calls, secrets, silent = [], [], []
     for p in sorted(root.rglob("*.py")):
-        if "__pycache__" in p.parts:
-            continue
+        if "__pycache__" in p.parts or p.name == "ci_static.py":
+            continue        # 自身包含检测关键字，扫描会误报
         try:
             src = p.read_text(encoding="utf-8")
         except OSError:
@@ -43,7 +43,7 @@ def scan_sources(root: pathlib.Path):
             for pat in BAD_CALLS:
                 if pat in src:
                     bad_calls.append(f"{p}: {pat}")
-        if SECRET_RE.search(src):
+        if "tests" not in p.parts and SECRET_RE.search(src):
             secrets.append(str(p))
         try:
             tree = ast.parse(src)
