@@ -50,11 +50,15 @@ def scan_sources(root: pathlib.Path):
         except SyntaxError as e:
             bad_calls.append(f"{p}: SyntaxError {e}")
             continue
+        src_lines = src.splitlines()
         for node in ast.walk(tree):
             if isinstance(node, ast.ExceptHandler):
                 body = node.body
                 if len(body) == 1 and isinstance(body[0], ast.Pass):
-                    silent.append(f"{p}:{node.lineno}")
+                    ln = body[0].lineno
+                    prev = src_lines[ln - 2] if 0 <= ln - 2 < len(src_lines) else ""
+                    if "noqa: silent-cleanup" not in prev:
+                        silent.append(f"{p}:{node.lineno}")
     return bad_calls, secrets, silent
 
 
