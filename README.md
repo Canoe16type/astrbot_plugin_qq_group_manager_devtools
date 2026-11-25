@@ -27,6 +27,8 @@ $PY selftest_variant.py           # 变体检测（谐音 / 形近 / 插符号�
 $PY selftest_mod_integration.py   # 审核链路（无 AstrBot 时自动跳过模型层）
 $PY selftest_admin_register.py    # /管理登记 链路
 $PY selftest_rule_spec.py         # 群规一行式文本解析
+$PY run_plugin_tests.py --plugin ../astrbot_plugin_qq_group_manager
+                                  # 运行插件仓库全量测试 + loader（不在 devtools 复制 tests）
 $PY build_lexicons.py             # 从公开词库生成 lexicons/（联网，缓存 7 天）
 $PY preview_dashboard.py          # 假后端 + 假数据预览面板（端口 8899）
 ```
